@@ -1,6 +1,9 @@
 package models
 
-import "gorm.io/gorm"
+import (
+	"errors"
+	"gorm.io/gorm"
+)
 
 type User struct {
 	ID       uint   `gorm:"primaryKey"`
@@ -11,12 +14,13 @@ type User struct {
 
 func IsPhoneExists(db *gorm.DB, phone string) bool {
 	var user User
-	db.Where("phone = ?", phone).First(&user)
-	if user.ID != 0 {
-		return true
+	result := db.Where("phone = ?", phone).First(&user)
+
+	if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+		return false
 	}
 
-	return false
+	return true
 }
 
 func CreateUser(db *gorm.DB, user User) *gorm.DB {

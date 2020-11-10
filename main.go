@@ -7,8 +7,10 @@ import (
 )
 
 func main() {
-	r := gin.Default()
+	gin.SetMode("debug")
+	engine := gin.Default()
+
 	common.InitDb()
-	r.POST("/register", controller.Register)
-	panic(r.Run(":8988"))
+	engine.POST("/register", controller.Register)
+	panic(engine.Run(":8988"))
 }
