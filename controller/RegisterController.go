@@ -54,5 +54,4 @@ func Register(ctx *gin.Context) {
 		"code":    200,
 		"message": "success",
 	})
-
 }
