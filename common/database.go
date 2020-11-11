@@ -10,11 +10,13 @@ import (
 var DB *gorm.DB
 
 func InitDb() *gorm.DB {
-	host := "192.168.232.129"
+	//host := "192.168.232.129"
+	host := "db.tuju.cn"
 	port := "3306"
 	database := "study"
 	username := "root"
-	password := "fanwei"
+	//password := "fanwei"
+	password := "AwytEJ1puYBlcy5K"
 	charset := "utf8mb4"
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=%s&parseTime=True",
 		username,

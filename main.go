@@ -2,15 +2,19 @@ package main
 
 import (
 	"g/study/common"
-	"g/study/controller"
+	"g/study/router"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
 	gin.SetMode("debug")
-	engine := gin.Default()
+
+	engine := gin.New()
+	engine.Use(gin.Logger(), gin.Recovery())
+
+	router.SetApiRoute(engine)
 
 	common.InitDb()
-	engine.POST("/register", controller.Register)
-	panic(engine.Run(":8988"))
+
+	panic(engine.Run(":8980"))
 }

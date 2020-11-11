@@ -23,6 +23,13 @@ func IsPhoneExists(db *gorm.DB, phone string) bool {
 	return true
 }
 
+func GetUserInfo(db *gorm.DB, phone string) User {
+	var user User
+	db.Where("phone = ?", phone).First(&user)
+
+	return user
+}
+
 func CreateUser(db *gorm.DB, user User) *gorm.DB {
 	return db.Create(&user)
 }
